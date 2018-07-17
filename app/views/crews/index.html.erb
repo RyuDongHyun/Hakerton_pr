@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+<%= link_to 'New Crew', new_crew_path %>
+
+<h1>Listing Crews</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Image</th>
+      <th colspan="5"></th>
+      <th>팔로잉 숫자</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @crews.each do |crew| %>
+      <tr>
+        <td><%= crew.title %></td>
+        <td><img src="<%= crew.image %>" height="100", width="100"></td>
+        
+        <td><%= link_to 'Show', crew %></td>
+        <% if current_user.is_admin?%>
+        <td><%= link_to 'Edit', edit_crew_path(crew) %></td>
+        <td><%= link_to 'Destroy', crew, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+        
+        <% unless current_user.rolls.find_by(crew_id: crew.id) %>
+          <td><%= link_to "팔로우", "/signing/#{crew.id}/follow"%></td>
+        <% else %>
+          <td><%= link_to "팔로우 해제", "/signing/#{crew.id}/unfollow"%></td>
+        <% end%>
+        <td></td>
+        <td><%= crew.rolls.size%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+

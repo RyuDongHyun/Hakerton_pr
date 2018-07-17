@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @crew.title %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @crew.desc %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <img src="<%= @crew.image %>", height="300", width="300">
+</p>
+<%= link_to 'Edit', edit_crew_path(@crew) %>
+<%= link_to 'Back', crews_path %><br>
+
+<%if current_user.rolls.find_by(crew_id: @crew.id)%>
+  <% if current_user.rolls.find_by(crew_id: @crew.id).is_signed? == "ok"%>
+    <p>가입된 크루</p>
+  <% elsif current_user.rolls.find_by(crew_id: @crew.id).is_signed? == "sign_ing"%>
+    <p>가입중..</p>
+    
+  <% else%>
+    <%= link_to "가입", "/signing/#{@crew.id}/sign_up"%>
+  <% end%>
+<% end%>
+
