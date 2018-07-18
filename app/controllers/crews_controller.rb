@@ -15,6 +15,7 @@ class CrewsController < ApplicationController
   
   def mysign
     @pre_member= Crew.find(params[:id]).rolls
+    @crew_id = params[:id]
   end
 
   # GET /crews/1
@@ -35,9 +36,12 @@ class CrewsController < ApplicationController
   # POST /crews.json
   def create
     @crew = current_user.crews.new(crew_params)
-
+    
     respond_to do |format|
       if @crew.save
+        @crew.users.push(current_user)
+        current_user.rolls.find_by(crew_id: @crew.id).update(is_signed?: "admin")
+        
         format.html { redirect_to @crew, notice: 'Crew was successfully created.' }
         format.json { render :show, status: :created, location: @crew }
       else
@@ -45,6 +49,7 @@ class CrewsController < ApplicationController
         format.json { render json: @crew.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
   # PATCH/PUT /crews/1
@@ -64,7 +69,9 @@ class CrewsController < ApplicationController
   # DELETE /crews/1
   # DELETE /crews/1.json
   def destroy
+    @crew.users.delete(current_user)
     @crew.destroy
+    
     respond_to do |format|
       format.html { redirect_to crews_url, notice: 'Crew was successfully destroyed.' }
       format.json { head :no_content }

@@ -14,7 +14,13 @@
     <%if roll.is_signed? == "sign_ing"%>
           <tr>
             <td><%= User.find(roll.user_id).email%></td>
-            <td><%= link_to "승인" , "/signing/#{User.find(roll.user_id).id}/ok"%></td>
+            <td>
+                <%= form_tag("/signing") do%>
+                    <%= hidden_field_tag(:user_id, User.find(roll.user_id).id) %>
+                    <%= hidden_field_tag(:crew_id, @crew_id) %>
+                    <%= submit_tag("승인")%>
+                <% end%>
+            </td>
           </tr>
       <%end%>
     <% end %>

@@ -22,9 +22,14 @@
     <p>가입된 크루</p>
   <% elsif current_user.rolls.find_by(crew_id: @crew.id).is_signed? == "sign_ing"%>
     <p>가입중..</p>
-    
-  <% else%>
+  <% elsif current_user.rolls.find_by(crew_id: @crew.id).is_signed? == "admin"%>
+    <%= link_to "선정도서 올리기", new_post_path%>
+  <% elsif current_user.rolls.find_by(crew_id: @crew.id).is_signed? == "follow"%>
     <%= link_to "가입", "/signing/#{@crew.id}/sign_up"%>
-  <% end%>
+  <%end%>
+<% else %>
+    <%= link_to "가입", "/signing/#{@crew.id}/sign_up"%>
 <% end%>
+  
+
 

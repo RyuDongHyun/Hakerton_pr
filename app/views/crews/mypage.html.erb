@@ -27,8 +27,12 @@
                     <% count += 1%>
                 <%end %>
             <%end%>
-  
-            <td><%= link_to "#{count}", "/crews/#{crew.id}/mysign"%></td>
+            
+            <% unless count==0%>
+                <td><%= link_to "#{count}", "/crews/#{crew.id}/mysign"%></td>
+            <% else%>
+                <td>0</td>
+            <%end%>
         <% end%>
       </tr>
     <% end %>
