@@ -1,6 +1,9 @@
 class CrewsController < ApplicationController
   before_action :set_crew, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :destroy_book 
+    
+
 
   # GET /crews
   # GET /crews.json
@@ -9,7 +12,7 @@ class CrewsController < ApplicationController
   end
   
   def mypage
-    
+    @posts = Post.all
     
   end
   
@@ -21,6 +24,7 @@ class CrewsController < ApplicationController
   # GET /crews/1
   # GET /crews/1.json
   def show
+    @posts=Post.find_by(user_id: current_user.id)
   end
 
   # GET /crews/new
@@ -87,5 +91,9 @@ class CrewsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def crew_params
       params.require(:crew).permit(:title, :desc, :image, :user_id)
+    end
+    
+    def destroy_book
+      Searching.destroy_all
     end
 end

@@ -10,7 +10,7 @@
   
 <%= link_to "홈", root_path%>
 <%= link_to "회원가입", new_user_registration_path%><br>
-<%= link_to "책 검색", '/posts/search_book' %>
+
 
 <% unless user_signed_in?%>
 <%= link_to "로그인", new_user_session_path%><br>

@@ -24,8 +24,11 @@ ActiveRecord::Schema.define(version: 20180718122628) do
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
-    t.string   "content"
-    t.string   "image"
+    t.string   "authors"
+    t.string   "thumbnail"
+    t.string   "category"
+    t.string   "contents"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

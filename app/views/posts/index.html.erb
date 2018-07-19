@@ -16,11 +16,15 @@
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.title %></td>
-        <td><%= post.content %></td>
-        <td><%= post.image %></td>
+        <td><%= post.contents %></td>
+        <td><img src="<%= post.thumbnail %>"></td>
         <td><%= link_to 'Show', post %></td>
+        
+        <% if current_user.is_admin? || (current_user.id == post.user.id)%>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+
       </tr>
     <% end %>
   </tbody>

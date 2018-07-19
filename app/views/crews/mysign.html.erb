@@ -10,7 +10,7 @@
   </thead>
 
   <tbody>
-    <%= @pre_member.each do |roll|%>
+    <% @pre_member.each do |roll|%>
     <%if roll.is_signed? == "sign_ing"%>
           <tr>
             <td><%= User.find(roll.user_id).email%></td>

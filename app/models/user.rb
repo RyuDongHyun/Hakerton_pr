@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :rolls
   has_many :joined_crews, through: :rolls, source: :crew
-  
+  has_many :posts
   has_many :crews
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
-  # before_action :set_post, only: [:show, :edit, :update, :destroy]
+  #before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :destroy_book, except: [:search_book]
+    
 
   # GET /posts
   # GET /posts.json
@@ -114,6 +116,10 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :image)
+      params.require(:post).permit(:title, :authors, :thumbnail,:category, :user_id)
+    end
+
+    def destroy_book
+      Searching.destroy_all
     end
 end

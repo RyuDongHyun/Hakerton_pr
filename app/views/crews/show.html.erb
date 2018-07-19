@@ -30,6 +30,32 @@
 <% else %>
     <%= link_to "가입", "/signing/#{@crew.id}/sign_up"%>
 <% end%>
+
+<h1>선정도서</h1>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Image</th>
+      <th>Category</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <% User.find(@crew.rolls.find_by(is_signed?: "admin").user_id).posts.each do |post| %>
+        <tr>
+          <td><%= post.title %></td>
+          <td><img src="<%= post.thumbnail %>" height="100", width="100"></td>
+          <td><%= post.category %></td>
+          <td><%= link_to 'Show', "/posts/#{post.id}" %></td>
+        </tr>
+      <% end %>
+    
+  </tbody>
+</table>
+
+<br>
   
-
-

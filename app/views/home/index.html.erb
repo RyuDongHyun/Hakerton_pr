@@ -1,4 +1,6 @@
 <h1>홈페이지 화면</h1>
+<%= link_to "마이페이지", crews_mypage_path%><br>
+<%= link_to "Crews 둘러보기" ,crews_path%>
 
 <h1>팔로우한 Crew들</h1>
 
@@ -24,6 +26,34 @@
 
 <br>
 
+<h1>팔로우한 Crew들이 선정한 도서</h1>
 
-<%= link_to "마이페이지", crews_mypage_path%><br>
-<%= link_to "Crews 둘러보기" ,crews_path%>
+<div>
+  <!--<thead>-->
+  <!--  <tr>-->
+  <!--    <th>Title</th>-->
+  <!--    <th>Image</th>-->
+  <!--    <th colspan="3"></th>-->
+  <!--  </tr>-->
+  <!--</thead>-->
+
+  <div>
+    <% @crews.each do |crew| %>
+      <img src="<%= crew.image%>" height="150" width="150"><br>
+      <p><%= crew.title%> 크루가 선정한 도서</p>
+      <% crew.rolls.find_by(is_signed?: "admin").user.posts.each do |post|%>
+        <div>
+          <span><%= post.title %></span>
+          <span><img src="<%= post.thumbnail %>" height="100", width="100"></span>
+          <span><%= link_to 'Show', crew %></span>
+        </div>
+      <%end%>
+      <br>
+      <br>
+    <% end %>
+  </div>
+</div>
+
+<br>
+
+

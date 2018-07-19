@@ -12,18 +12,52 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :title ,'제목'%><br>
+    <% if params[:title]%>
+    <%= f.text_field :title, value: params[:title] %>
+    <% else%>
     <%= f.text_field :title %>
+    <% end%>
+  </div>
+   <div class="field">
+    <%= f.label :authors ,'작가'%><br>
+    <% if params[:authors]%>
+    <%= f.text_field :authors, value: params[:authors] %>
+    <% else%>
+    <%= f.text_field :authors %>
+    <% end%>
   </div>
   <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_field :content %>
+    <%= f.label :thumbnail ,'이미지'%><br>
+    <% if params[:thumbnail]%>
+    <%= f.text_field :thumbnail, value: params[:thumbnail] %>
+    <% else%>
+    <%= f.text_field :thumbnail %>
+    <% end%>
   </div>
   <div class="field">
-    <%= f.label :image %><br>
-    <%= f.text_field :image %>
+    <%= f.label :category ,'분야'%><br>
+    <% if params[:category]%>
+    <%= f.text_field :category, value: params[:category] %>
+    <% else%>
+    <%= f.text_field :category %>
+    <% end%>
   </div>
+   <div class="field">
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  </div>
+  
+  
   <div class="actions">
     <%= f.submit %>
   </div>
+  
+  
+
+<!--:title-->
+<!--:authors-->
+<!--:thumbnail-->
+<!--:category-->
+<!--:contents-->
+
 <% end %>
